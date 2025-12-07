@@ -1,0 +1,84 @@
+{
+    "model": {
+        "token_encoder": {
+            "d_conv_stages": [64, 128, 128],
+            "conv_layers_per_stage": 1,
+            "conv_k_stages": [2, 4, 4],
+            "ff_mult": 2,
+            "act_fn": "swiglu"
+        },
+        "decoder_m": {
+            "d_conv_stages": [64, 128, 256],
+            "d_bottleneck": 256,
+            "conv_layers_per_stage": 2,
+            "conv_k_stages": [2, 4, 4],
+            "ff_mult": 3,
+            "act_fn": "swiglu"
+        },
+        "decoder_phi": {
+            "d_conv_stages": [64, 128, 256],
+            "d_bottleneck": 256,
+            "conv_layers_per_stage": 2,
+            "conv_k_stages": [2, 4, 4],
+            "ff_mult": 3,
+            "act_fn": "swiglu"
+        },
+        "seq_encoder": {
+            "num_layers": 8,
+            "d_model": 1024,
+            "attn_d_head": 64,
+            "attn_query_grouping": 4,
+            "ff_mult": 3,
+            "act_fn": "swiglu"
+        },
+        "seq_predictor": {
+            "num_layers": 8,
+            "d_model": 1024,
+            "attn_d_head": 64,
+            "attn_query_grouping": 4,
+            "ff_mult": 3,
+            "act_fn": "swiglu"
+        },
+        "d_signal": 2,
+        "d_token": 512,
+        "length_tokens": 256,
+        "seq_enc_length_tokens": 64,
+        "frames_per_token": 4,
+        "decoder_lookback_frames": 8,
+        "frame_samples": 2048,
+        "frame_overlap_samples": 1536,
+        "seq_pred_extra_future": 1,
+        "pred_grad_frames": 32,
+        "p_eps_ctx_global": "tri",
+        "p_eps_ctx_frame": "uniform",
+        "p_t": "uniform",
+        "p_s": "logit_normal",
+        "t_scale": 1000.0,
+        "prior": "uniform",
+        "sample_eps_ctx": 0.02,
+        "substep_autoguidance": 2.0
+    },
+    "batch_size": 8,
+    "batch_size_per_device": 2,
+    "optim": {
+        "type": "adamw",
+        "lr": 1e-4,
+        "weight_decay": 1e-4,
+        "betas": [0.9, 0.95]
+    },
+    "lr_warmup": 10000,
+    "lr_decay": "quadratic",
+    "lr_decay_halflife": 1000000,
+    "clip_grad": 1.0,
+    "train_data": "wobble",
+    "eval_data": "wobble",
+    "save_every": 50000,
+    "eval_every": 1000,
+    "eval_examples": 8,
+    "eval_log_examples": 4,
+    "sample_every": 5000,
+    "sample_count_fixed": 2,
+    "sample_count_random": 0,
+    "sample_count_gold": 1,
+    "sample_clip": 1.0
+}

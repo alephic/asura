@@ -1,0 +1,10 @@
+/env
+*.pyc
+/data
+/logs
+/checkpoints
+/outputs
+/logs_old
+/checkpoints_old
+/*.npy
+/*.png
